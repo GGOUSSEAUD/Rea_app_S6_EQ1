@@ -1,0 +1,4 @@
+////// Ce fichier sert à mettre des notes ou penses bêtes utiles(ou pas) //////
+
+SQL
+MCD
