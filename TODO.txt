@@ -1,0 +1,9 @@
+Reprendre ce format pour de futur tâches
+
+FORMAT
+Itération 1:
+
+Tâches:
+-Blah blah blah(Bug #1).  => FAIT [n°commit]
+-Foo bar(Exercice 7.5). => FAIT [n°commit]
+-Toto(Requête de modif -Votre_nom).  => FAIT [n°commit]
