@@ -1,0 +1,13 @@
+////// Ce fichier sert à mettre des notes ou penses bêtes utiles(ou pas) //////
+
+LIVRE
+
+7.1 , mini résumé:
+
+Faire un code mal structuré c'est mal, surtout quand le code devient de plus en plus gros.
+Les entreprises qui travaillent et vive d'un logiciel se doivent d'avoir un code bien structuré ou sinon c'est la PLS (Bonne gestion des classes), c'est mieux pour les modifications futures.
+
+zuul-bad , bad parceque mal codé (Mal organisé).
+
+zuul est sensé être un jeu d'aventure(encore incomplet). Zuul est la base de notre projet.
+
