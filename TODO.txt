@@ -1,4 +1,4 @@
-Reprendre ce format pour de futur tâches
+Reprendre ce format pour de futures tâches
 
 FORMAT
 Itération 1:
