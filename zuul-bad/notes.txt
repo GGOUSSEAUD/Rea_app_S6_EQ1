@@ -1,5 +1,9 @@
 ////// Ce fichier sert à mettre des notes ou penses bêtes utiles(ou pas) //////
 
+Logiciel à Installer:
+-BlueJ
+
+
 LIVRE
 
 7.1 , mini résumé:
@@ -10,4 +14,10 @@ Les entreprises qui travaillent et vive d'un logiciel se doivent d'avoir un code
 zuul-bad , bad parceque mal codé (Mal organisé).
 
 zuul est sensé être un jeu d'aventure(encore incomplet). Zuul est la base de notre projet.
+
+Le fait qu'il soit mal codé nous donnera une idée de ce qu'est un mauvais "class design" afin de ne pas le reproduire.
+
+zuul-better et zuul-bad ont les mêmes fonctionnalités mais pas les mêmes structures de classe avec "bad" et "better" designs.
+
+Le fait que les deux ont les mêmes fonctionnalités ne veut pas dire qu'on arrive pas à le résoudre c'est juste qu'on arrive pas à bien structurer (généralement). On peut pas faire genre "Y'avais pas d'autres moyens".
 
