@@ -1,0 +1,47 @@
+/// Ce fichier à pour but de vous aider et d'aider les autres. Il va répertorier les commandes git utiles que vous connaisser et les détailler ///
+
+Tip: Souvenez que vous pouvez empiler un flag -m ou un flag -a en flag -am par exemple.
+
+Ma routine(Gaëtan):
+-git pull
+-git add
+-git commit
+-git push
+
+GIT ADD
+
+Utilisation: git add -flags nom_fichier_ou_dossier
+Utilité: Ajoute à la pile de modification du prochain commit un/des fichier(s) ou dossier(s).
+Flags:
+-A : Add TOUTES les dernières modifications.
+
+GIT COMMIT
+
+Utilisation: git commit -Flags nom_fichier_ou_dossier "Message(seulement si -m)"
+Utilité: Comfirme les modifications de la pile de modifications pour le prochain git push.
+Flags:
+-A : Add TOUTES les dernières modifications.
+-m : Permet d'ajouter le message du commit à la suite de la ligne de commande entre "".
+
+GIT PULL
+
+Utilisation: git pull
+Utilité: Met à jour votre dépôt local avec la version du git.
+
+GIT PUSH
+
+Utilisation git push
+Utilité: Met à jour la version du git avec votre version locale
+
+GIT RESET
+
+Utilisation: git reset
+Utilité: Réinitialise la pile des modifications (Remets les modifications était dans la pile en attente d'un git add).
+
+GIT LOG
+
+Utilisation: git log
+Utilité: Permet de visionner les commits avec leurs message (Part du plus récent au plus ancien).
+Flags:
+-n nombre : Affiche seulement le nième log (en partant du plus récent).
+
