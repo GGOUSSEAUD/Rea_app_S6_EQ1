@@ -7,14 +7,11 @@ Faire un code mal structuré c'est mal, surtout quand le code devient de plus en
 Les entreprises qui travaillent et vive d'un logiciel se doivent d'avoir un code bien structuré ou sinon c'est la PLS (Bonne gestion des classes), c'est mieux pour les modifications futures.
 
 zuul-bad , bad parceque mal codé (Mal organisé).
-
 zuul est sensé être un jeu d'aventure(encore incomplet). Zuul est la base de notre projet.
 
 Le fait qu'il soit mal codé nous donnera une idée de ce qu'est un mauvais "class design" afin de ne pas le reproduire.
-
 zuul-better et zuul-bad ont les mêmes fonctionnalités mais pas les mêmes structures de classe avec "bad" et "better" designs.
-
-Le fait que les deux ont les mêmes fonctionnalités ne veut pas dire qu'on arrive pas à le résoudre c'est juste qu'on arrive pas à bien structurer (généralement). On peut pas faire genre "Y'avais pas d'autres moyens".
+Le fait que les deux aient les mêmes fonctionnalités ne veut pas dire qu'on arrive pas à le résoudre c'est juste qu'on arrive pas à bien structurer (généralement). On peut pas faire genre "Y'avais pas d'autres moyens".
 
 
 7.1 :
