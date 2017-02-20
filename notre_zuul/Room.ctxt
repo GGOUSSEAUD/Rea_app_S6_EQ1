@@ -8,4 +8,6 @@ comment1.text=\n\ Define\ the\ exits\ of\ this\ room.\ \ Every\ direction\ eithe
 comment2.params=
 comment2.target=java.lang.String\ getDescription()
 comment2.text=\n\ @return\ The\ description\ of\ the\ room.\n
-numComments=3
+comment3.params=direction
+comment3.target=Room\ getExit(java.lang.String)
+numComments=4
