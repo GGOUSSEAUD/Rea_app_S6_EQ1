@@ -34,10 +34,11 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office, heaven;
+        Room outside, theatre, pub, lab, office, heaven, hell;
       
         // create the rooms
-        heaven = new Room("You are dead WP bro. Stfu gg wp surrend at 20 report my team !");
+        heaven = new Room("dead WP bro. Stfu gg wp surrend at 20 report my team !");
+        hell = new Room("in a blazing landscape, trees looks like burning sausages.");
         outside = new Room("outside the main entrance of the university");
         theatre = new Room("in a lecture theatre");
         pub = new Room("in the campus pub");
@@ -46,7 +47,8 @@ public class Game
         
         // initialise room exits
         heaven.setExits(null, null, null, null, null, outside);
-        outside.setExits(null, theatre, lab, pub, heaven, null);
+        hell.setExits(null, null, null, null, outside, null);
+        outside.setExits(null, theatre, lab, pub, heaven, hell);
         theatre.setExits(null, null, null, outside, null, null);
         pub.setExits(null, outside, null, null, null, null);
         lab.setExits(outside, office, null, null, null, null);
@@ -93,10 +95,10 @@ public class Game
             System.out.print("south ");
         if(currentRoom.westExit != null)
             System.out.print("west ");
-        if(currentRoom.topExit != null)
-            System.out.print("top ");
-        if(currentRoom.botExit != null)
-            System.out.print("bot ");
+        if(currentRoom.upExit != null)
+            System.out.print("up ");
+        if(currentRoom.downExit != null)
+            System.out.print("down ");
         System.out.println();
     }
 
@@ -169,11 +171,11 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
-        if(direction.equals("top")) {
-            nextRoom = currentRoom.topExit;
+        if(direction.equals("up")) {
+            nextRoom = currentRoom.upExit;
         }
-        if(direction.equals("bot")) {
-            nextRoom = currentRoom.botExit;
+        if(direction.equals("down")) {
+            nextRoom = currentRoom.downExit;
         }
 
         if (nextRoom == null) {
@@ -191,10 +193,10 @@ public class Game
                 System.out.print("south ");
             if(currentRoom.westExit != null)
                 System.out.print("west ");
-            if(currentRoom.botExit != null)
-                System.out.print("bot ");
-            if(currentRoom.topExit != null)
-                System.out.print("top ");
+            if(currentRoom.upExit != null)
+                System.out.print("up ");
+            if(currentRoom.downExit != null)
+                System.out.print("down ");
             System.out.println();
         }
     }
