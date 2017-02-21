@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -15,13 +16,8 @@
 public class Room 
 {
     private String description;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    private Room upExit;
-    private Room downExit;
-
+    private String exit_description;
+    private HashMap<String, Room> exits;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -31,6 +27,7 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<String, Room>();
     }
 
     /**
@@ -44,17 +41,17 @@ public class Room
     public void setExits(Room north, Room east, Room south, Room west, Room up, Room down) 
     {
         if(north != null)
-            northExit = north;
+            exits.put("north", north);
         if(east != null)
-            eastExit = east;
+            exits.put("east", east);
         if(south != null)
-            southExit = south;
+            exits.put("south", south);
         if(west != null)
-            westExit = west;
+            exits.put("west", west);
         if(up != null)
-            upExit = up;
+            exits.put("up", up);
         if(down != null)
-            downExit = down;
+            exits.put("down", down);
     }
 
     /**
@@ -64,27 +61,42 @@ public class Room
     {
         return description;
     }
-
+    
+    /**
+     * Return a description of the room's exits,
+     * for example, "Exits: north west".
+     * @return A description of the available exits
+     * Fonction qui bug
+     */
+   public String getExitString()
+    {
+        if(exit_description != null)
+            return exit_description; 
+        exit_description = "";        
+        for (Map.Entry<String, Room> entry : exits.entrySet()) {
+            String key = entry.getKey();
+            Room value = entry.getValue();
+            //System.out.println("Key is :"+ key + " value is: " + value);
+            if(value != null){
+                exit_description += key + " ";
+                //System.out.println("curr exit desc =" + exit_description);
+            }else
+                exit_description += "";
+            
+        }
+     return exit_description;
+    }
+    
+    /**
+    * Return the room that is reached if we go from this 
+    * room in direction "direction". If there is no room in 
+    * that direction, return null.
+    */
+    
     public Room getExit(String direction)
     {
-        if(direction.equals("north")) {
-               return northExit;
-        }
-        if(direction.equals("east")) {
-            return eastExit;
-        }
-        if(direction.equals("south")) {
-            return southExit;
-        }
-        if(direction.equals("west")) {
-            return westExit;
-        }
-        if(direction.equals("up")) {
-            return upExit;
-        }
-        if(direction.equals("down")) {
-            return downExit;
-        }
-        return null;
+        return exits.get(direction);
     }
+    
+    
 }

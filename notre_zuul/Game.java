@@ -32,7 +32,8 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: ");
+        System.out.println("Exits: " + currentRoom.getExitString());
+       /* System.out.print("Exits: ");
         if(currentRoom.getExit("north") != null)
             System.out.print("north ");
         if(currentRoom.getExit("east") != null)
@@ -45,7 +46,7 @@ public class Game
             System.out.print("up ");
         if(currentRoom.getExit("down") != null)
             System.out.print("down ");
-        System.out.println();
+        System.out.println("test");*/
     }
      /**
      * Create all the rooms and link their exits together.
