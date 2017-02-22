@@ -28,7 +28,10 @@ public class Game
         createRooms();
         parser = new Parser();
     }
-    /** Fonction évitant la duplication de print , Exercice 7.5**/
+    
+    /** 
+     * Fonction évitant la duplication de print , Exercice 7.5
+     */
     private void printLocationInfo()
     {
         System.out.println("You are " + currentRoom.getDescription());
@@ -48,6 +51,7 @@ public class Game
             System.out.print("down ");
         System.out.println("test");*/
     }
+   
      /**
      * Create all the rooms and link their exits together.
      */
@@ -65,17 +69,45 @@ public class Game
         office = new Room("in the computing admin office");
         
         // initialise room exits
-        heaven.setExits(null, null, null, null, null, outside);
-        hell.setExits(null, null, null, null, outside, null);
-        outside.setExits(null, theatre, lab, pub, heaven, hell);
-        theatre.setExits(null, null, null, outside, null, null);
-        pub.setExits(null, outside, null, null, null, null);
-        lab.setExits(outside, office, null, null, null, null);
-        office.setExits(null, null, null, lab, null, null);
-
+        //heaven.setExits(null, null, null, null, null, outside);
+        heaven.setExit("down", outside);
+        //hell.setExits(null, null, null, null, outside, null);
+        hell.setExit("up", outside);
+        //outside.setExits(null, theatre, lab, pub, heaven, hell);
+        outside.setExit("east", theatre);
+        outside.setExit("south", lab);
+        outside.setExit("west", pub);
+        outside.setExit("up", heaven);
+        outside.setExit("down", hell);
+        //theatre.setExits(null, null, null, outside, null, null);
+        theatre.setExit("west", outside);
+        //pub.setExits(null, outside, null, null, null, null);
+        pub.setExit("east", outside);
+        //lab.setExits(outside, office, null, null, null, null);
+        lab.setExit("north", outside);
+        lab.setExit("east", office);
+        //office.setExits(null, null, null, lab, null, null);
+        office.setExit("west", lab);
+        
         currentRoom = outside;  // start game outside
     }
-
+    
+    /**
+     *  Show the description
+     */
+    private void look()
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
+    /**
+     *  UGH UGH UGH
+     */
+    private void eat()
+    {
+        System.out.println("Wow you look more and more fat !");
+    }
+    
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -126,7 +158,11 @@ public class Game
             printHelp();
         else if (commandWord.equals("go"))
             goRoom(command);
-        else if (commandWord.equals("quit"))
+        else if (commandWord.equals("look"))
+            look();
+        else if (commandWord.equals("eat"))
+            eat();
+            else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
         return wantToQuit;
@@ -145,7 +181,7 @@ public class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        parser.showCommands();
     }
 
     /** 
