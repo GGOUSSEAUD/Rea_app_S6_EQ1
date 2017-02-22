@@ -21,3 +21,6 @@ zuul-better et zuul-bad ont les mêmes fonctionnalités mais pas les mêmes stru
 
 Le fait que les deux ont les mêmes fonctionnalités ne veut pas dire qu'on arrive pas à le résoudre c'est juste qu'on arrive pas à bien structurer (généralement). On peut pas faire genre "Y'avais pas d'autres moyens".
 
+
+Coupling: Interconnectivitée entre les classes. "Loose"(Faible) et "tight"(forte) interconnectivitée veut dire que plus c'est faible , moins les conflits de modifications entre classe seront inexistant et inversement (Loose = Mieux)
+Cohesion: Nombre de tâches assigné à une classe ou une méthode.
