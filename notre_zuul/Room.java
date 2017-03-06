@@ -66,7 +66,6 @@ public class Room
      * Return a description of the room's exits,
      * for example, "Exits: north west".
      * @return A description of the available exits
-     * Fonction qui bug
      */
    public String getExitString()
     {

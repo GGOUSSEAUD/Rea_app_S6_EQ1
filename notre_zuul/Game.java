@@ -28,7 +28,11 @@ public class Game
         createRooms();
         parser = new Parser();
     }
-    /** Fonction évitant la duplication de print , Exercice 7.5**/
+    
+    /** 
+     * Fonction évitant la duplication de print.
+     * Exercice 7.5.
+     */
     private void printLocationInfo()
     {
         System.out.println("You are " + currentRoom.getDescription());
@@ -48,6 +52,7 @@ public class Game
             System.out.print("down ");
         System.out.println("test");*/
     }
+    
      /**
      * Create all the rooms and link their exits together.
      */
