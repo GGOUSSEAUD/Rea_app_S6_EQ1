@@ -1,2 +1,0 @@
-Ceci est un test pour voir le fonctionnement de Branch
-Second test pour voir si le pull est param.
