@@ -9,11 +9,17 @@
  * @author  Michael Kolling and David J. Barnes
  * @version 1.0 (Jan 2003)
  */
+
+import java.util.HashMap;
+
 public class GameEngine
 {
+    private HashMap<String, Room> hmRoom = new HashMap<>();
+    private HashMap<String, Item> hmItem = new HashMap<>();
     private Parser parser;
     private Room currentRoom;
     private UserInterface gui;
+    private Room room;
 
     /**
      * Constructor for objects of class GameEngine
@@ -22,6 +28,12 @@ public class GameEngine
     {
         parser = new Parser();
         createRooms();
+        createItems();
+        Item item = (hmItem.get("food"));
+        room = (hmRoom.get("outside"));
+        //System.out.println(item.getWeight());
+        //gui.print((hmRoom.get("outside")).getShortDescription());
+        //gui.print(room.getShortDescription());
     }
 
     public void setGUI(UserInterface userInterface)
@@ -36,14 +48,33 @@ public class GameEngine
     private void printWelcome()
     {
         gui.print("\n");
-        gui.println("Welcome to the World of Zuul!");
-        gui.println("World of Zuul is a new, incredibly boring adventure game.");
-        gui.println("Type 'help' if you need help.");
+        gui.println("Bienvenue dans le monde de [INSERER TITRE DE JEU STUPIDE ICI]");
+        gui.println("[INSERER TITRE DE JEU STUPIDE ICI] est un magnifique jeu de promenade !");
+        //gui.println("Taper 'help' pour obtenir de l'aide.");
         gui.print("\n");
         gui.println(currentRoom.getLongDescription());
         gui.showImage(currentRoom.getImageName());
     }
 
+    private void createItems()
+    {
+        Item sword, food, chair, keyboard, card;
+
+        // create the item
+        sword = new Item("l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
+        food = new Item("une chaise, toute bonne grand mère a toujours sa chaise pour faire une pose durant sa promenade", 3.0);
+        chair = new Item("du Thon allégée, parfait pour les petites faim.", 0.2);
+        keyboard = new Item("un clavier qui fait de la lumière !", 1.2);
+        card = new Item("une carte de sécurité", 0.02);
+        
+        hmItem.put("sword", sword);
+        hmItem.put("food", food);
+        hmItem.put("chair", chair);
+        hmItem.put("keyboard", keyboard);
+        hmItem.put("card", card);
+
+    }    
+   
     /**
      * Create all the rooms and link their exits together.
      */
@@ -52,11 +83,17 @@ public class GameEngine
         Room outside, theatre, pub, lab, office;
 
         // create the rooms
-        outside = new Room("outside the main entrance of the university", "outside.gif");
+        outside = new Room("outside the main entrance of the university", "titre.png");
         theatre = new Room("in a lecture theatre", "castle.gif");
         pub = new Room("in the campus pub", "courtyard.gif");
         lab = new Room("in a computing lab", "stairs.gif");
         office = new Room("the computing admin office", "dungeon.gif");
+        
+        hmRoom.put("outside", outside);
+        hmRoom.put("theatre", theatre);
+        hmRoom.put("pub", pub);
+        hmRoom.put("lab", lab);
+        hmRoom.put("office", office);
         
         // initialise room exits
         outside.setExit("east", theatre);
@@ -71,6 +108,19 @@ public class GameEngine
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        //initialise item
+        theatre.setItem("sword", hmItem.get("sword"));
+        theatre.setItem("chair", hmItem.get("chair"));
+        
+        pub.setItem("food", hmItem.get("food"));
+        
+        lab.setItem("keyboard", hmItem.get("keyboard"));
+        
+        office.setItem("card", hmItem.get("card"));
+        
+        
+        
 
         currentRoom = outside;  // start game outside
     }
@@ -110,11 +160,12 @@ public class GameEngine
      * Here we print some stupid, cryptic message and a list of the 
      * command words.
      */
-    private void printHelp() 
+    public void printHelp() 
     {
         gui.println("You are lost. You are alone. You wander");
         gui.println("around at Monash Uni, Peninsula Campus." + "\n");
         gui.print("Your command words are: " + parser.showCommands());
+        gui.print("\n");
     }
 
     /** 

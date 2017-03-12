@@ -18,6 +18,7 @@ public class UserInterface implements ActionListener
     private JTextField entryField;
     private JTextArea log;
     private JLabel image;
+    private JButton myButton;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -80,8 +81,11 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        myFrame = new JFrame("Zork");
+        myFrame = new JFrame("[INSERER TITRE STUPIDE DE JEU ICI]");
         entryField = new JTextField(34);
+        
+        myButton = new JButton("Aide ?");
+        myButton.addActionListener(this);
 
         log = new JTextArea();
         log.setEditable(false);
@@ -90,12 +94,16 @@ public class UserInterface implements ActionListener
         listScroller.setMinimumSize(new Dimension(100,100));
 
         JPanel panel = new JPanel();
+        JPanel opanel = new JPanel();
         image = new JLabel();
 
         panel.setLayout(new BorderLayout());
+        opanel.setLayout(new BorderLayout());
         panel.add(image, BorderLayout.NORTH);
         panel.add(listScroller, BorderLayout.CENTER);
-        panel.add(entryField, BorderLayout.SOUTH);
+        opanel.add(entryField, BorderLayout.CENTER);
+        opanel.add(myButton, BorderLayout.SOUTH);
+        panel.add(opanel, BorderLayout.SOUTH);
 
         myFrame.getContentPane().add(panel, BorderLayout.CENTER);
 
@@ -116,10 +124,14 @@ public class UserInterface implements ActionListener
      */
     public void actionPerformed(ActionEvent e) 
     {
-        // no need to check the type of action at the moment.
-        // there is only one possible action: text entry
-        processCommand();
+        Object source = e.getSource();
+        if(source == myButton){
+            engine.printHelp();
+        }else{
+            processCommand();
+        }
     }
+
 
     /**
      * A command has been entered. Read the command and do whatever is 
