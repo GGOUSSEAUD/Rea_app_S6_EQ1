@@ -11,13 +11,16 @@
  */
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class GameEngine
 {
+    private Stack<Room> historyRoom = new Stack<>();
     private HashMap<String, Room> hmRoom = new HashMap<>();
     private HashMap<String, Item> hmItem = new HashMap<>();
     private Parser parser;
     private Room currentRoom;
+    private Room lastRoom;
     private UserInterface gui;
     private Room room;
 
@@ -115,6 +118,7 @@ public class GameEngine
         office.setItem("card", hmItem.get("card"));
         
         currentRoom = outside;  // start game outside
+        lastRoom = outside;
     }
 
     /**
@@ -137,6 +141,8 @@ public class GameEngine
             printHelp();
         else if (commandWord.equals("go"))
             goRoom(command);
+        else if (commandWord.equals("back"))
+            back(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -180,11 +186,37 @@ public class GameEngine
         if (nextRoom == null)
             gui.println("There is no door!");
         else {
+            historyRoom.push(currentRoom);
+            lastRoom = currentRoom;
             currentRoom = nextRoom;
             gui.println(currentRoom.getLongDescription());
+            gui.println(currentRoom.getItemDescriptionString());
             if(currentRoom.getImageName() != null)
                 gui.showImage(currentRoom.getImageName());
         }
+    }
+    
+    private void back(Command command){
+        if(command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            gui.println("Back What ?");
+            return;
+        }
+        
+        if(historyRoom.empty()){
+            gui.println("UGH UGH UGH Fucking retarded player who want back more what he can.");
+            return;
+        }
+        
+        currentRoom = historyRoom.peek();
+        historyRoom.pop();
+        
+        gui.println(currentRoom.getLongDescription());
+        gui.println(currentRoom.getItemDescriptionString());
+        if(currentRoom.getImageName() != null)
+            gui.showImage(currentRoom.getImageName());
+        else
+            gui.showImage("titre.png");
     }
 
     private void endGame()
