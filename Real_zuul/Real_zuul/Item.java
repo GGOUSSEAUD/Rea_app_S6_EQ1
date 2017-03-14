@@ -27,7 +27,7 @@ public class Item
         this.weight = weight;
     }
 
-    public String getShortDescription()
+    public String getDescription()
     {
         return description;
     }

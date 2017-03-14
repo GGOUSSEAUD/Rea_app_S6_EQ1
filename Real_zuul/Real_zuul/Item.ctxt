@@ -2,7 +2,7 @@
 comment0.params=description\ weight
 comment0.target=Item(java.lang.String,\ double)
 comment1.params=
-comment1.target=java.lang.String\ getShortDescription()
+comment1.target=java.lang.String\ getDescription()
 comment2.params=
 comment2.target=double\ getWeight()
 numComments=3

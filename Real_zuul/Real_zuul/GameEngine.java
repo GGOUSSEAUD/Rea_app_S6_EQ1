@@ -27,13 +27,8 @@ public class GameEngine
     public GameEngine()
     {
         parser = new Parser();
-        createRooms();
         createItems();
-        Item item = (hmItem.get("food"));
-        room = (hmRoom.get("outside"));
-        //System.out.println(item.getWeight());
-        //gui.print((hmRoom.get("outside")).getShortDescription());
-        //gui.print(room.getShortDescription());
+        createRooms();
     }
 
     public void setGUI(UserInterface userInterface)
@@ -62,8 +57,8 @@ public class GameEngine
 
         // create the item
         sword = new Item("l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
-        food = new Item("une chaise, toute bonne grand mère a toujours sa chaise pour faire une pose durant sa promenade", 3.0);
-        chair = new Item("du Thon allégée, parfait pour les petites faim.", 0.2);
+        chair = new Item("une chaise, toute bonne grand mère a toujours sa chaise pour faire une pose durant sa promenade", 3.0);
+        food = new Item("du Thon allégée, parfait pour les petites faim.", 0.2);
         keyboard = new Item("un clavier qui fait de la lumière !", 1.2);
         card = new Item("une carte de sécurité", 0.02);
         
@@ -119,9 +114,6 @@ public class GameEngine
         
         office.setItem("card", hmItem.get("card"));
         
-        
-        
-
         currentRoom = outside;  // start game outside
     }
 
