@@ -129,6 +129,8 @@ public class GameEngine
         lab.setItem("keyboard", hmItem.get("keyboard"));
         
         office.setItem("card", hmItem.get("card"));
+        
+        currentRoom = outside;
     }
 
     /**
@@ -155,6 +157,8 @@ public class GameEngine
             back(command);
         else if (commandWord.equals("test"))
             test(command);
+        else if (commandWord.equals("take"))
+            take(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -206,6 +210,31 @@ public class GameEngine
             if(currentRoom.getImageName() != null)
                 gui.showImage(currentRoom.getImageName());
         }
+    }
+    
+    private void take(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            gui.println("Prendre quoi ?");
+            return;
+        }
+
+        String itemName = command.getSecondWord();
+        Item actualItem = hmItem.get(itemName);
+
+        if (actualItem == null)
+            gui.println("Cette Item n'existe pas.");
+        else if (!currentRoom.itemExist(itemName)) {
+            if(mainPlayer.takeItem(actualItem) == 1)
+                currentRoom.removeItem(itemName);
+            else
+                gui.println("Vous avez déjà quelque chose dans la main.");
+        }
+        else {
+            gui.println("Cette Item n'est plus dans cette salle.");
+        }
+        gui.println(mainPlayer.showInventory());
+        gui.println(mainPlayer.getCarriedItem());
     }
     
     private void back(Command command){

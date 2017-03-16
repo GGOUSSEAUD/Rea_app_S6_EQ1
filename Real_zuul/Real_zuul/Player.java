@@ -1,10 +1,11 @@
 import java.util.Vector;
+import java.util.Iterator;
 
 public class Player{
     private String name;
     private String description;
     private double maxWeight;
-    private Vector playerInventory;
+    private Vector<Item> playerInventory = new Vector<Item>();
     private Room currentRoom;
     private Item carriedItem;
 
@@ -63,5 +64,26 @@ public class Player{
         }
         else
             return 0;
+    }
+    
+    public String showInventory(){
+        StringBuilder inventory = new StringBuilder ("Inventaire : ");
+        int i = playerInventory.size();
+        if(playerInventory.isEmpty()){
+            inventory.append("Rien.");
+        } else{
+            while(i != 0){
+                inventory.append(playerInventory.elementAt(i).getName());
+                i-= 1;
+            }
+            inventory.append(".");
+        }
+        return inventory.toString();
+    }
+    
+    public String getCarriedItem(){
+        if(carriedItem != null)
+            return carriedItem.getName();
+        return "Rien";
     }
 }
