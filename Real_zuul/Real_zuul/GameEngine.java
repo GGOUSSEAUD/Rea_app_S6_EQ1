@@ -12,6 +12,10 @@
 
 import java.util.HashMap;
 import java.util.Stack;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.lang.Thread;
 
 public class GameEngine
 {
@@ -143,6 +147,8 @@ public class GameEngine
             goRoom(command);
         else if (commandWord.equals("back"))
             back(command);
+        else if (commandWord.equals("test"))
+            test(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -217,6 +223,37 @@ public class GameEngine
             gui.showImage(currentRoom.getImageName());
         else
             gui.showImage("titre.png");
+    }
+    
+    private void test(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            gui.println("Tester quoi ?");
+            return;
+        }
+        
+        
+        String FILENAME = command.getSecondWord();
+        BufferedReader br = null;
+        FileReader fr = null;
+        
+        String sCurrentLine;
+        try{
+        br = new BufferedReader(new FileReader (FILENAME));
+        
+        while ((sCurrentLine = br.readLine()) != null){
+            interpretCommand(sCurrentLine);
+        }
+        if(br !=null)
+            br.close();
+        if(fr !=null)
+            fr.close();
+        }
+        catch (IOException e){
+            gui.println("Aucun fichier de ce nom existe.");
+            return;
+        }
+        return;
     }
 
     private void endGame()
