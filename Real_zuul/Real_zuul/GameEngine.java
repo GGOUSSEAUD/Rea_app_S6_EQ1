@@ -24,9 +24,9 @@ public class GameEngine
     private HashMap<String, Item> hmItem = new HashMap<>();
     private Parser parser;
     private Room currentRoom;
-    private Room lastRoom;
     private UserInterface gui;
     private Room room;
+    private Player mainPlayer;
 
     /**
      * Constructor for objects of class GameEngine
@@ -36,6 +36,7 @@ public class GameEngine
         parser = new Parser();
         createItems();
         createRooms();
+        mainPlayer = createPlayer();
     }
 
     public void setGUI(UserInterface userInterface)
@@ -57,6 +58,14 @@ public class GameEngine
         gui.println(currentRoom.getLongDescription());
         gui.showImage(currentRoom.getImageName());
     }
+    
+    private Player createPlayer()
+    {
+        Player player;
+        player = new Player("Bernard", "Un preu chevalier resistant contre l'espionage de ça femme", 5.0);
+        player.setCurrentRoom(hmRoom.get("outside"));
+        return player;
+    }  
 
     private void createItems()
     {
@@ -120,9 +129,6 @@ public class GameEngine
         lab.setItem("keyboard", hmItem.get("keyboard"));
         
         office.setItem("card", hmItem.get("card"));
-        
-        currentRoom = outside;  // start game outside
-        lastRoom = outside;
     }
 
     /**
@@ -193,8 +199,8 @@ public class GameEngine
             gui.println("There is no door!");
         else {
             historyRoom.push(currentRoom);
-            lastRoom = currentRoom;
             currentRoom = nextRoom;
+            mainPlayer.setCurrentRoom(currentRoom);
             gui.println(currentRoom.getLongDescription());
             gui.println(currentRoom.getItemDescriptionString());
             if(currentRoom.getImageName() != null)

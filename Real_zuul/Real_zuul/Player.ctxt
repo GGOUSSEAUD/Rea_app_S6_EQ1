@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=name\ description\ maxWeight
+comment0.target=Player(java.lang.String,\ java.lang.String,\ double)
+comment1.params=
+comment1.target=java.lang.String\ getName()
+comment2.params=
+comment2.target=java.lang.String\ getDescription()
+comment3.params=
+comment3.target=double\ getMaxWeight()
+comment4.params=
+comment4.target=Room\ getCurrentRoom()
+comment5.params=thisRoom
+comment5.target=void\ setCurrentRoom(Room)
+comment6.params=
+comment6.target=int\ carryItem()
+comment7.params=thisItem
+comment7.target=int\ takeItem(Item)
+comment8.params=
+comment8.target=int\ dropItem()
+numComments=9
