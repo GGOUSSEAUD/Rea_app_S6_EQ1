@@ -5,7 +5,7 @@ public class Player{
     private String name;
     private String description;
     private double maxWeight;
-    private Vector<Item> playerInventory = new Vector<Item>();
+    private Vector<Item> playerInventory;
     private Room currentRoom;
     private Item carriedItem;
 
@@ -39,6 +39,10 @@ public class Player{
         currentRoom = thisRoom;
     }
     
+    public void setMaxWeight(double newMaxWeight){
+        maxWeight = newMaxWeight;
+    }
+    
     public int carryItem(){
         if(carriedItem !=null){
             playerInventory.add(carriedItem);
@@ -69,21 +73,43 @@ public class Player{
     public String showInventory(){
         StringBuilder inventory = new StringBuilder ("Inventaire : ");
         int i = playerInventory.size();
+        int b = 0;
         if(playerInventory.isEmpty()){
             inventory.append("Rien.");
         } else{
-            while(i != 0){
-                inventory.append(playerInventory.elementAt(i).getName());
-                i-= 1;
+            while(b < i){
+                inventory.append(playerInventory.elementAt(b).getName());
+                b+= 1;
             }
             inventory.append(".");
         }
         return inventory.toString();
     }
     
-    public String getCarriedItem(){
-        if(carriedItem != null)
+    public String getCarriedItemName(){
             return carriedItem.getName();
-        return "Rien";
+    }
+    
+    public Item getCarriedItem(){
+            return carriedItem;
+    }
+    
+    public boolean inInventory(Item thisItem){
+        return playerInventory.contains(thisItem);
+    }
+    
+    public void uncarryItem(Item thisItem){
+        playerInventory.remove(thisItem);
+    }
+    
+    
+    public double totalWeight(){
+        int i = playerInventory.size();
+        double y = 0.0;
+        while(i != 0){
+             y += playerInventory.elementAt(i).getWeight();
+             i-= 1;
+        }
+        return y;
     }
 }

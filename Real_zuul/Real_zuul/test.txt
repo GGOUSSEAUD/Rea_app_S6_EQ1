@@ -1,7 +1,2 @@
-help
-go east
-back
-go west
-back
 go south
-go east
+take keyboard

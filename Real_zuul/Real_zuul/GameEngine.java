@@ -72,11 +72,11 @@ public class GameEngine
         Item sword, food, chair, keyboard, card;
 
         // create the item
-        sword = new Item("épée", "l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
-        chair = new Item("Chaise", "une chaise, toute bonne grand mère a toujours sa chaise pour faire une pose durant sa promenade", 3.0);
-        food = new Item("Nouriture", "du Thon allégée, parfait pour les petites faim.", 0.2);
-        keyboard = new Item("clavier", "un clavier qui fait de la lumière !", 1.2);
-        card = new Item("Carte", "une carte de sécurité", 0.02);
+        sword = new Item("sword", "l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
+        chair = new Item("chair", "une chaise, toute bonne grand mère a toujours sa chaise pour faire une pose durant sa promenade", 3.0);
+        food = new Item("food", "du Thon allégée, parfait pour les petites faim.", 0.2);
+        keyboard = new Item("keyboard", "un clavier qui fait de la lumière !", 1.2);
+        card = new Item("card", "une carte de sécurité", 0.02);
         
         hmItem.put("sword", sword);
         hmItem.put("food", food);
@@ -159,6 +159,10 @@ public class GameEngine
             test(command);
         else if (commandWord.equals("take"))
             take(command);
+        else if (commandWord.equals("drop"))
+            drop(command);
+        else if (commandWord.equals("carry"))
+            carryItem(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -218,23 +222,77 @@ public class GameEngine
             gui.println("Prendre quoi ?");
             return;
         }
-
+System.out.println("test1");
         String itemName = command.getSecondWord();
+System.out.println("test2");
         Item actualItem = hmItem.get(itemName);
-
-        if (actualItem == null)
+        System.out.println("test2bis");
+        if (actualItem == null){
             gui.println("Cette Item n'existe pas.");
+            return;
+        }
+     System.out.println("test3");   
+        if (actualItem.getWeight() > mainPlayer.getMaxWeight()){
+            gui.println("C'est trop lourd pour vous !");
+            return;
+        }
+        
         else if (!currentRoom.itemExist(itemName)) {
             if(mainPlayer.takeItem(actualItem) == 1)
                 currentRoom.removeItem(itemName);
             else
                 gui.println("Vous avez déjà quelque chose dans la main.");
         }
-        else {
-            gui.println("Cette Item n'est plus dans cette salle.");
+        else if(mainPlayer.inInventory(actualItem)){
+            mainPlayer.uncarryItem(actualItem);
+            mainPlayer.takeItem(actualItem);
         }
+        else {
+            gui.println("Cette Item n'est plus dans cette salle ni dans votre inventaire.");
+        }
+        System.out.println("test4");
         gui.println(mainPlayer.showInventory());
-        gui.println(mainPlayer.getCarriedItem());
+        System.out.println("test5");
+        gui.println(mainPlayer.getCarriedItemName());
+    }
+    
+    private void drop(Command command) 
+    {
+        if(command.hasSecondWord()) {
+            gui.println("Vous ne pouvez drop que l'objet que vous avez dans la main.");
+            return;
+        }
+        
+        Item actualItem = mainPlayer.getCarriedItem();
+        
+        if (actualItem == null)
+            gui.println("Vous n'avez rien dans la main.");
+        else{
+            currentRoom.setItem(mainPlayer.getCarriedItemName(), hmItem.get(mainPlayer.getCarriedItemName()));
+            mainPlayer.dropItem();
+        }
+            
+    }
+
+    private void carryItem(Command command){
+        if(command.hasSecondWord()) {
+            gui.println("Vous ne pouvez porter que ce que vous avez dans la main.");
+            return;
+        }
+
+        Item actualItem = mainPlayer.getCarriedItem();
+        
+        if (actualItem == null){
+            gui.println("Vous tenter réellement de stocker du vide ?");
+            return;
+        }
+        
+        if ((actualItem.getWeight()+mainPlayer.totalWeight()) > mainPlayer.getMaxWeight()){
+            gui.println("Cela depasse la charge maximal que vous pouvez stocker.");
+            return;
+        }
+        mainPlayer.carryItem();
+        gui.println(mainPlayer.showInventory());
     }
     
     private void back(Command command){
