@@ -5,20 +5,26 @@ public class Player{
     private String name;
     private String description;
     private double maxWeight;
-    private Vector<Item> playerInventory;
+    private double maxTakable;
+    private Vector<Item> playerInventory = new Vector<Item>();
     private Room currentRoom;
     private Item carriedItem;
 
-    public Player(String name, String description, double maxWeight) 
+    public Player(String name, String description, double maxWeight, double maxTakable) 
     {
         this.name = name;
         this.description = description;
         this.maxWeight = maxWeight;
+        this.maxTakable = maxTakable;
     }
     
     public String getName()
     {
         return name;
+    }
+    
+    public double getMaxTakable(){
+        return maxTakable;
     }
 
     public String getDescription()
@@ -75,14 +81,38 @@ public class Player{
         int i = playerInventory.size();
         int b = 0;
         if(playerInventory.isEmpty()){
-            inventory.append("Rien.");
+            inventory.append("Rien. \nVous avez dans la main : ");
         } else{
             while(b < i){
-                inventory.append(playerInventory.elementAt(b).getName());
+                inventory.append(playerInventory.elementAt(b).getName() + " ");
                 b+= 1;
             }
-            inventory.append(".");
+            inventory.append(".\nVous avez dans la main : ");
         }
+        if(carriedItem == null)
+            inventory.append("rien.");
+        else
+            inventory.append(carriedItem.getName() + ".");
+        return inventory.toString();
+    }
+    
+    public String showInventory2(){
+        StringBuilder inventory = new StringBuilder ("Inventaire : ");
+        int i = playerInventory.size();
+        int b = 0;
+        if(playerInventory.isEmpty()){
+            inventory.append("Rien. \nVous avez dans la main : ");
+        } else{
+            while(b < i){
+                inventory.append(playerInventory.elementAt(b).getName() + " : " + playerInventory.elementAt(b).getDescription() + " [" + playerInventory.elementAt(b).getWeight() + "]\n");
+                b+= 1;
+            }
+            inventory.append(".\nVous avez dans la main : ");
+        }
+        if(carriedItem == null)
+            inventory.append("rien.");
+        else
+            inventory.append(carriedItem.getName() + " : " + carriedItem.getDescription() + " [" + carriedItem.getWeight() + "]");
         return inventory.toString();
     }
     
@@ -102,13 +132,14 @@ public class Player{
         playerInventory.remove(thisItem);
     }
     
-    
     public double totalWeight(){
         int i = playerInventory.size();
         double y = 0.0;
-        while(i != 0){
-             y += playerInventory.elementAt(i).getWeight();
+        int b = 0;
+        while(b < i){
+             y += playerInventory.elementAt(b).getWeight();
              i-= 1;
+             b+=1;
         }
         return y;
     }

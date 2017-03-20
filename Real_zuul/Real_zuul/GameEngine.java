@@ -62,7 +62,7 @@ public class GameEngine
     private Player createPlayer()
     {
         Player player;
-        player = new Player("Bernard", "Un preu chevalier resistant contre l'espionage de ça femme", 5.0);
+        player = new Player("Bernard", "Un preu chevalier resistant contre l'espionage de ça femme", 5.0, 3.0);
         player.setCurrentRoom(hmRoom.get("outside"));
         return player;
     }  
@@ -163,6 +163,8 @@ public class GameEngine
             drop(command);
         else if (commandWord.equals("carry"))
             carryItem(command);
+        else if (commandWord.equals("items"))
+            items();
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -211,6 +213,8 @@ public class GameEngine
             mainPlayer.setCurrentRoom(currentRoom);
             gui.println(currentRoom.getLongDescription());
             gui.println(currentRoom.getItemDescriptionString());
+            gui.println(mainPlayer.showInventory());
+            
             if(currentRoom.getImageName() != null)
                 gui.showImage(currentRoom.getImageName());
         }
@@ -222,22 +226,17 @@ public class GameEngine
             gui.println("Prendre quoi ?");
             return;
         }
-System.out.println("test1");
         String itemName = command.getSecondWord();
-System.out.println("test2");
         Item actualItem = hmItem.get(itemName);
-        System.out.println("test2bis");
         if (actualItem == null){
             gui.println("Cette Item n'existe pas.");
             return;
-        }
-     System.out.println("test3");   
-        if (actualItem.getWeight() > mainPlayer.getMaxWeight()){
+        }  
+        else if (actualItem.getWeight() > mainPlayer.getMaxWeight() && actualItem.getWeight() > mainPlayer.getMaxTakable()){
             gui.println("C'est trop lourd pour vous !");
             return;
         }
-        
-        else if (!currentRoom.itemExist(itemName)) {
+        else if (currentRoom.itemExist(actualItem)) {
             if(mainPlayer.takeItem(actualItem) == 1)
                 currentRoom.removeItem(itemName);
             else
@@ -250,19 +249,12 @@ System.out.println("test2");
         else {
             gui.println("Cette Item n'est plus dans cette salle ni dans votre inventaire.");
         }
-        System.out.println("test4");
         gui.println(mainPlayer.showInventory());
-        System.out.println("test5");
-        gui.println(mainPlayer.getCarriedItemName());
+        //gui.println(mainPlayer.getCarriedItemName());
     }
     
     private void drop(Command command) 
-    {
-        if(command.hasSecondWord()) {
-            gui.println("Vous ne pouvez drop que l'objet que vous avez dans la main.");
-            return;
-        }
-        
+    {       
         Item actualItem = mainPlayer.getCarriedItem();
         
         if (actualItem == null)
@@ -271,7 +263,7 @@ System.out.println("test2");
             currentRoom.setItem(mainPlayer.getCarriedItemName(), hmItem.get(mainPlayer.getCarriedItemName()));
             mainPlayer.dropItem();
         }
-            
+        gui.println(mainPlayer.showInventory());  
     }
 
     private void carryItem(Command command){
@@ -347,6 +339,10 @@ System.out.println("test2");
             return;
         }
         return;
+    }
+    
+    private void items(){
+        gui.println(mainPlayer.showInventory2());
     }
 
     private void endGame()
