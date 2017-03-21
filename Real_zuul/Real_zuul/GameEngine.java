@@ -69,7 +69,7 @@ public class GameEngine
 
     private void createItems()
     {
-        Item sword, food, chair, keyboard, card;
+        Item sword, food, chair, keyboard, card, magic_cookie;
 
         // create the item
         sword = new Item("sword", "l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
@@ -77,12 +77,15 @@ public class GameEngine
         food = new Item("food", "du Thon allégée, parfait pour les petites faim.", 0.2);
         keyboard = new Item("keyboard", "un clavier qui fait de la lumière !", 1.2);
         card = new Item("card", "une carte de sécurité", 0.02);
+        magic_cookie = new Item("magic_cookie", "un cookie magique pour porter encore plus d'objets !", 0.03);
+         
         
         hmItem.put("sword", sword);
         hmItem.put("food", food);
         hmItem.put("chair", chair);
         hmItem.put("keyboard", keyboard);
         hmItem.put("card", card);
+        hmItem.put("magic_cookie", magic_cookie);
 
     }    
    
@@ -128,8 +131,10 @@ public class GameEngine
         
         lab.setItem("keyboard", hmItem.get("keyboard"));
         
-        office.setItem("card", hmItem.get("card"));
-        
+ 
+       office.setItem("card", hmItem.get("card"));
+       office.setItem("magic_cookie", hmItem.get("magic_cookie"));
+       
         currentRoom = outside;
     }
 
@@ -165,6 +170,8 @@ public class GameEngine
             carryItem(command);
         else if (commandWord.equals("items"))
             items();
+        else if (commandWord.equals("eat cookie"))
+            eatCookie(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -349,6 +356,11 @@ public class GameEngine
     {
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
+    }
+    
+    private void eatCookie(Command command) 
+    {       
+        mainPlayer.setMaxWeight(mainPlayer.getMaxWeight()+5);
     }
 
 }

@@ -1,10 +1,12 @@
 #BlueJ class context
-comment0.params=name\ description\ weight
-comment0.target=Item(java.lang.String,\ java.lang.String,\ double)
-comment1.params=
-comment1.target=java.lang.String\ getName()
+comment0.target=Item
+comment0.text=\n\ Class\ Room\ -\ a\ room\ in\ an\ adventure\ game.\n\n\ This\ class\ is\ part\ of\ the\ "World\ of\ Zuul"\ application.\ \n\ "World\ of\ Zuul"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\n\ A\ "Room"\ represents\ one\ location\ in\ the\ scenery\ of\ the\ game.\ \ It\ is\ \n\ connected\ to\ other\ rooms\ via\ exits.\ \ For\ each\ existing\ exit,\ the\ room\ \n\ stores\ a\ reference\ to\ the\ neighboring\ room.\n\ \n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\n\ @version\ 1.0\ (February\ 2002)\ DBMOD\:04/04/2008\n
+comment1.params=name\ description\ weight
+comment1.target=Item(java.lang.String,\ java.lang.String,\ double)
 comment2.params=
-comment2.target=java.lang.String\ getDescription()
+comment2.target=java.lang.String\ getName()
 comment3.params=
-comment3.target=double\ getWeight()
-numComments=4
+comment3.target=java.lang.String\ getDescription()
+comment4.params=
+comment4.target=double\ getWeight()
+numComments=5

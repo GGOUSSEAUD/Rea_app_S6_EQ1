@@ -1,5 +1,7 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Game()
-comment0.text=\n\ Create\ the\ game\ and\ initialise\ its\ internal\ map.\n
-numComments=1
+comment0.target=Game
+comment0.text=\n\ \ This\ class\ is\ the\ main\ class\ of\ the\ "World\ of\ Zuul"\ application.\ \n\ \ "World\ of\ Zuul"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ Users\ \n\ \ can\ walk\ around\ some\ scenery.\ That's\ all.\ It\ should\ really\ be\ extended\ \n\ \ to\ make\ it\ more\ interesting\!\n\ \n\ \ To\ play\ this\ game,\ create\ an\ instance\ of\ this\ class.\n\ \n\ \ This\ main\ class\ creates\ the\ necessary\ implementation\ objects\ and\ starts\ the\ game\ off.\n\ \n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\n\ @version\ 2.0\ (Jan\ 2003)\n
+comment1.params=
+comment1.target=Game()
+comment1.text=\n\ Create\ the\ game\ and\ initialise\ its\ internal\ map.\n
+numComments=2
