@@ -27,6 +27,7 @@ public class GameEngine
     private UserInterface gui;
     private Room room;
     private Player mainPlayer;
+    private int time = 50;
 
     /**
      * Constructor for objects of class GameEngine
@@ -69,7 +70,7 @@ public class GameEngine
 
     private void createItems()
     {
-        Item sword, food, chair, keyboard, card, magic_cookie;
+        Item sword, food, chair, keyboard, card, magic_cookie, beamer, receptBeamer;
 
         // create the item
         sword = new Item("sword", "l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
@@ -78,7 +79,8 @@ public class GameEngine
         keyboard = new Item("keyboard", "un clavier qui fait de la lumière !", 1.2);
         card = new Item("card", "une carte de sécurité", 0.02);
         magic_cookie = new Item("magic_cookie", "un cookie magique pour porter encore plus d'objets !", 0.03);
-         
+        beamer = new Item("beamer", "Un bouton avec une antenne, comment ne pas vouloir l'utiliser ?", 0.5);
+        receptBeamer = new Item("recept beamer", "Une sorte de plaque metalique avec ecrit Tepelorteur for children.", 2.5);
         
         hmItem.put("sword", sword);
         hmItem.put("food", food);
@@ -86,6 +88,8 @@ public class GameEngine
         hmItem.put("keyboard", keyboard);
         hmItem.put("card", card);
         hmItem.put("magic_cookie", magic_cookie);
+        hmItem.put("beamer", beamer);
+        hmItem.put("receptBeamer", receptBeamer);
 
     }    
    
@@ -113,6 +117,7 @@ public class GameEngine
         outside.setExit("east", theatre);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.setExit("trap", office);
 
         theatre.setExit("west", outside);
 
@@ -147,7 +152,13 @@ public class GameEngine
     {
         gui.println(commandLine);
         Command command = parser.getCommand(commandLine);
-
+        
+        if(time == 0){
+            gui.println("Le poison vous à tuer...");
+            endGame();
+            return;
+        }
+        
         if(command.isUnknown()) {
             gui.println("I don't know what you mean...");
             return;
@@ -156,10 +167,14 @@ public class GameEngine
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help"))
             printHelp();
-        else if (commandWord.equals("go"))
+        else if (commandWord.equals("go")){
+            time--;
             goRoom(command);
-        else if (commandWord.equals("back"))
+        }
+        else if (commandWord.equals("back")){
             back(command);
+            time--;
+        }
         else if (commandWord.equals("test"))
             test(command);
         else if (commandWord.equals("take"))
@@ -235,6 +250,7 @@ public class GameEngine
         }
         String itemName = command.getSecondWord();
         Item actualItem = hmItem.get(itemName);
+        
         if (actualItem == null){
             gui.println("Cette Item n'existe pas.");
             return;
@@ -363,7 +379,7 @@ public class GameEngine
         Item actualItem = hmItem.get(itemName);
         
         if(mainPlayer.inInventory(actualItem) == false){
-            gui.println("Tu ne possèdes aucun objet de ce nom.");
+            gui.println("Tu ne possèdes aucun objet de ce nom dans votre inventaire.");
             return;
         }
         
@@ -371,6 +387,7 @@ public class GameEngine
             gui.println("Nom nom nomn , que c'est bon! La magie flux en moi! + 2 en poids max d'inventaire" );
             gui.println("Poids max d'inventaire maximum: " + mainPlayer.getMaxWeight() + "->" + (mainPlayer.getMaxWeight() + 2));
             mainPlayer.setMaxWeight(mainPlayer.getMaxWeight() + 2.0);
+            mainPlayer.uncarryItem(actualItem);
             return;
         }
     }
