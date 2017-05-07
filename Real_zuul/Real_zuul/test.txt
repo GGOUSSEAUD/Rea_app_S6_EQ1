@@ -1,2 +1,10 @@
+back
 go south
 take keyboard
+carry
+go east
+take magic_cookie
+carry
+use magic_cookie
+back
+back

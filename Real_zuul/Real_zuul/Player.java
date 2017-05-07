@@ -128,10 +128,12 @@ public class Player{
         return playerInventory.contains(thisItem);
     }
     
-    public void uncarryItem(Item thisItem){
+    public void removeInvItem(Item thisItem){
         playerInventory.remove(thisItem);
     }
-    
+    public void removeHandItem(){
+        carriedItem = null;
+    }
     public double totalWeight(){
         int i = playerInventory.size();
         double y = 0.0;

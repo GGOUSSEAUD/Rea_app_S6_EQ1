@@ -266,7 +266,7 @@ public class GameEngine
                 gui.println("Vous avez déjà quelque chose dans la main.");
         }
         else if(mainPlayer.inInventory(actualItem)){
-            mainPlayer.uncarryItem(actualItem);
+            mainPlayer.removeInvItem(actualItem);
             mainPlayer.takeItem(actualItem);
         }
         else {
@@ -378,7 +378,7 @@ public class GameEngine
         String itemName = command.getSecondWord();
         Item actualItem = hmItem.get(itemName);
         
-        if(mainPlayer.inInventory(actualItem) == false){
+        if(mainPlayer.inInventory(actualItem) == false && mainPlayer.getCarriedItem()!= actualItem){
             gui.println("Tu ne possèdes aucun objet de ce nom dans votre inventaire.");
             return;
         }
@@ -387,7 +387,10 @@ public class GameEngine
             gui.println("Nom nom nomn , que c'est bon! La magie flux en moi! + 2 en poids max d'inventaire" );
             gui.println("Poids max d'inventaire maximum: " + mainPlayer.getMaxWeight() + "->" + (mainPlayer.getMaxWeight() + 2));
             mainPlayer.setMaxWeight(mainPlayer.getMaxWeight() + 2.0);
-            mainPlayer.uncarryItem(actualItem);
+            if(mainPlayer.getCarriedItem() == actualItem)
+                mainPlayer.removeHandItem();
+            else
+                mainPlayer.removeInvItem(actualItem);
             return;
         }
     }
