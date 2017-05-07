@@ -27,7 +27,7 @@ public class GameEngine
     private UserInterface gui;
     private Room room;
     private Player mainPlayer;
-    private int time = 50;
+    //private int time = 50; Iter4
 
     /**
      * Constructor for objects of class GameEngine
@@ -70,7 +70,7 @@ public class GameEngine
 
     private void createItems()
     {
-        Item sword, food, chair, keyboard, card, magic_cookie, beamer, receptBeamer;
+        Item sword, food, chair, keyboard, card, magic_cookie;// beamer, receptBeamer; Iter4
 
         // create the item
         sword = new Item("sword", "l'épee vibrante de Maman, Elle en a combatue des monstres avec ça !", 0.6);
@@ -79,8 +79,8 @@ public class GameEngine
         keyboard = new Item("keyboard", "un clavier qui fait de la lumière !", 1.2);
         card = new Item("card", "une carte de sécurité", 0.02);
         magic_cookie = new Item("magic_cookie", "un cookie magique pour porter encore plus d'objets !", 0.03);
-        beamer = new Item("beamer", "Un bouton avec une antenne, comment ne pas vouloir l'utiliser ?", 0.5);
-        receptBeamer = new Item("recept beamer", "Une sorte de plaque metalique avec ecrit Tepelorteur for children.", 2.5);
+        //beamer = new Item("beamer", "Un bouton avec une antenne, comment ne pas vouloir l'utiliser ?", 0.5); Iter4
+        //receptBeamer = new Item("recept beamer", "Une sorte de plaque metalique avec ecrit Tepelorteur for children.", 2.5); Iter4
         
         hmItem.put("sword", sword);
         hmItem.put("food", food);
@@ -88,8 +88,8 @@ public class GameEngine
         hmItem.put("keyboard", keyboard);
         hmItem.put("card", card);
         hmItem.put("magic_cookie", magic_cookie);
-        hmItem.put("beamer", beamer);
-        hmItem.put("receptBeamer", receptBeamer);
+        //hmItem.put("beamer", beamer); Iter4
+        //hmItem.put("receptBeamer", receptBeamer);Iter4
 
     }    
    
@@ -117,7 +117,7 @@ public class GameEngine
         outside.setExit("east", theatre);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
-        outside.setExit("trap", office);
+        //outside.setExit("trap", office); Iter4
 
         theatre.setExit("west", outside);
 
@@ -153,11 +153,11 @@ public class GameEngine
         gui.println(commandLine);
         Command command = parser.getCommand(commandLine);
         
-        if(time == 0){
+        /*if(time == 0){
             gui.println("Le poison vous à tuer...");
             endGame();
             return;
-        }
+        } Iter4 */
         
         if(command.isUnknown()) {
             gui.println("I don't know what you mean...");
@@ -168,12 +168,12 @@ public class GameEngine
         if (commandWord.equals("help"))
             printHelp();
         else if (commandWord.equals("go")){
-            time--;
+            //time--; Iter4
             goRoom(command);
         }
         else if (commandWord.equals("back")){
+            //time--; Iter4
             back(command);
-            time--;
         }
         else if (commandWord.equals("test"))
             test(command);
