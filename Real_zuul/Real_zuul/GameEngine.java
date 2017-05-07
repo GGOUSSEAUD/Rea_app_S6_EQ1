@@ -170,8 +170,8 @@ public class GameEngine
             carryItem(command);
         else if (commandWord.equals("items"))
             items();
-        else if (commandWord.equals("eat cookie"))
-            eatCookie(command);
+        else if (commandWord.equals("use"))
+            use(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
                 gui.println("Quit what?");
@@ -351,16 +351,33 @@ public class GameEngine
     private void items(){
         gui.println(mainPlayer.showInventory2());
     }
-
+    
+    private void use(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word
+            gui.println("Use what?");
+            return;
+        }
+        
+        String itemName = command.getSecondWord();
+        Item actualItem = hmItem.get(itemName);
+        
+        if(mainPlayer.inInventory(actualItem) == false){
+            gui.println("Tu ne possèdes aucun objet de ce nom.");
+            return;
+        }
+        
+        if(actualItem == hmItem.get("magic_cookie")){
+            gui.println("Nom nom nomn , que c'est bon! La magie flux en moi! + 2 en poids max d'inventaire" );
+            gui.println("Poids max d'inventaire maximum: " + mainPlayer.getMaxWeight() + "->" + (mainPlayer.getMaxWeight() + 2));
+            mainPlayer.setMaxWeight(mainPlayer.getMaxWeight() + 2.0);
+            return;
+        }
+    }
+    
     private void endGame()
     {
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
     }
-    
-    private void eatCookie(Command command) 
-    {       
-        mainPlayer.setMaxWeight(mainPlayer.getMaxWeight()+5);
-    }
-
 }

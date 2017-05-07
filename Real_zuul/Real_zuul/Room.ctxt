@@ -1,4 +1,2 @@
 #BlueJ class context
-comment0.target=Room
-comment0.text=\n\ Class\ Room\ -\ a\ room\ in\ an\ adventure\ game.\n\n\ This\ class\ is\ part\ of\ the\ "World\ of\ Zuul"\ application.\ \n\ "World\ of\ Zuul"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\n\ A\ "Room"\ represents\ one\ location\ in\ the\ scenery\ of\ the\ game.\ \ It\ is\ \n\ connected\ to\ other\ rooms\ via\ exits.\ \ For\ each\ existing\ exit,\ the\ room\ \n\ stores\ a\ reference\ to\ the\ neighboring\ room.\n\ \n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\n\ @version\ 1.0\ (February\ 2002)\ DBMOD\:04/04/2008\n
-numComments=1
+numComments=0
