@@ -164,35 +164,47 @@ public class GameEngine
             return;
         }
 
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help"))
-            printHelp();
-        else if (commandWord.equals("go")){
-            //time--; Iter4
-            goRoom(command);
-        }
-        else if (commandWord.equals("back")){
-            //time--; Iter4
-            back(command);
-        }
-        else if (commandWord.equals("test"))
-            test(command);
-        else if (commandWord.equals("take"))
-            take(command);
-        else if (commandWord.equals("drop"))
-            drop(command);
-        else if (commandWord.equals("carry"))
-            carryItem(command);
-        else if (commandWord.equals("items"))
-            items();
-        else if (commandWord.equals("use"))
-            use(command);
-        else if (commandWord.equals("quit")) {
-            if(command.hasSecondWord())
-                gui.println("Quit what?");
-            else
-                endGame();
-        }
+        CommandWord commandWord = command.getCommandWord();
+        switch(commandWord){
+            case HELP:
+                printHelp();
+                break;
+            case GO:
+                //time--; Iter4
+                goRoom(command);
+                break;
+            case BACK:
+                //time--; Iter4
+                back(command);
+                break;
+            case TEST:
+                test(command);
+                break;
+            case TAKE:
+                take(command);
+                break;
+            case DROP:
+                drop(command);
+                break;
+            case CARRY:
+                carryItem(command);
+                break;
+            case ITEMS:
+                items();
+                break;
+            case USE:
+                use(command);
+                break;
+            case LOOK:
+                look();
+                break;
+            case QUIT:
+                if(command.hasSecondWord())
+                    gui.println("Quit what?");
+                else
+                    endGame();
+                break;
+            }
     }
 
     // implementations of user commands:
@@ -393,6 +405,11 @@ public class GameEngine
                 mainPlayer.removeInvItem(actualItem);
             return;
         }
+    }
+
+    private void look()
+    { 
+        gui.println(currentRoom.getLongDescription());
     }
     
     private void endGame()
